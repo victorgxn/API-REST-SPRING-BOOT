@@ -28,12 +28,12 @@ public class UserService {
 
 
     public UserModel updateByID(UserModel request, Long id ){
-        UserModel userModel = userRepository.findById(id).get();
-        userModel.setFirstName(request.getFirstName());
-        userModel.setLastName(request.getLastName());
-        userModel.setEmail(request.getEmail());
-        userRepository.save(userModel);
-        return userModel;
+        UserModel user = userRepository.findById(id).get();
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setEmail(request.getEmail());
+        userRepository.save(user);
+        return user;
     }
 
 
