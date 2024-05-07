@@ -2,7 +2,6 @@ package com.api.crud.services;
 
 import com.api.crud.models.UserModel;
 import com.api.crud.repositories.IUserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +10,11 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired
-    IUserRepository userRepository;
+    private final IUserRepository userRepository;
+
+    public UserService(IUserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public ArrayList<UserModel> getUsers () {
         return (ArrayList<UserModel>) userRepository.findAll();
@@ -36,5 +38,13 @@ public class UserService {
         return user;
     }
 
+    public Boolean deleteUser(Long id) {
+        try {
+            userRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 }
